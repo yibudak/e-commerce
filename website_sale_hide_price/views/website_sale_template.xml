@@ -40,7 +40,8 @@
         <xpath expr="//a[@id='add_to_cart']" position="before">
             <div
                 class="alert alert-info"
-                t-if="product.website_hide_price or not (website and website.website_show_price)"
+                t-if="(product.website_hide_price_message or website.website_hide_price_default_message)
+                 and not (website and website.website_show_price and not product.website_hide_price)"
             >
                 <i class="fa fa-info-circle" /> <span
                     t-esc="product.website_hide_price_message or website.website_hide_price_default_message"
