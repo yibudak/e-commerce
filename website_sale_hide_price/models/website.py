@@ -17,5 +17,16 @@ class Website(models.Model):
     )
 
     def _compute_website_show_price(self):
+        googlebot_uas = [
+            "Googlebot",
+            "Googlebot-Image",
+            "Google-InspectionTool",
+            "Storebot-Google",
+        ]
         for rec in self:
-            rec.website_show_price = request.env.user.partner_id.website_show_price
+            is_googlebot = any(
+                ua in str(request.httprequest.user_agent) for ua in googlebot_uas
+            )
+            rec.website_show_price = (
+                request.env.user.partner_id.website_show_price or is_googlebot
+            )

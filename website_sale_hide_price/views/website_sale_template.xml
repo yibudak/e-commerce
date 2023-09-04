@@ -24,7 +24,7 @@
         <xpath expr="//div[@itemprop='offers']" position="attributes">
             <attribute name="t-if">
                     product.product_variant_ids and website.website_show_price and not product.website_hide_price
-                </attribute>
+            </attribute>
         </xpath>
     </template>
     <!-- Hide Add To Cart Button and quantity selector if not website_show_price -->
