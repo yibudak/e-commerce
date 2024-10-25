@@ -19,3 +19,11 @@ Hide prices at product level:
 #. In the *Shop* section you have the option *Hide prices on website*.
 #. You can optionally set a message that will be displayed when the prices are
    hidden.
+
+If you want to hide prices at website level
+
+#. Go to *Website > Configuration > Settings* and choose the website to hide the prices.
+#. In the *Shop - Products* section you have the option *Hide prices on website*
+
+Both *Default Hidden price message* field at website level and *Hidden price message*
+at product level are only shown on product page when price is hidden at product level.

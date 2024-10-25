@@ -8,11 +8,17 @@ from odoo.http import request
 class Website(models.Model):
     _inherit = "website"
 
+    website_hide_price = fields.Boolean(
+        string="Hide prices on website",
+        copy=False,
+        help="Hide price at website level",
+    )
     website_show_price = fields.Boolean(compute="_compute_website_show_price")
     website_hide_price_default_message = fields.Char(
         string="Default Hidden price message",
-        help="When the price is hidden on the website we can give the customer"
-        "some tips on how to find it out.",
+        help="When the price is hidden on the website because of product "
+        "configuration we can give the customer some tips on how to find it "
+        "out.",
         translate=True,
     )
 

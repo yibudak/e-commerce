@@ -10,7 +10,9 @@
         >
             <attribute
                 name="t-cache"
-            >pricelist,products,website,website.website_show_price</attribute>
+                add="website,website.website_show_price"
+                separator=","
+            />
         </xpath>
     </template>
     <template id="product_price" inherit_id="website_sale.product_price">
@@ -28,14 +30,19 @@
         </xpath>
     </template>
     <!-- Hide Add To Cart Button and quantity selector if not website_show_price -->
-    <template id="product" inherit_id="website_sale.product">
+    <template id="product" inherit_id="website_sale.product" priority="18">
         <!-- adding website, website.website_show_price and product.website_hide_price to t-cache in order to update cache if parameter modified
              this is needed if you connect with a different user that should not see the prices
              see https://github.com/OCA/e-commerce/issues/818 -->
-        <xpath expr="t[@t-cache='pricelist,product']" position="attributes">
-          <attribute
+        <xpath
+            expr="//t[starts-with(@t-cache, 'pricelist,product')]"
+            position="attributes"
+        >
+            <attribute
                 name="t-cache"
-            >pricelist,product,website,website.website_show_price,product.website_hide_price</attribute>
+                add="website,website.website_show_price,product.website_hide_price"
+                separator=","
+            />
         </xpath>
         <xpath expr="//a[@id='add_to_cart']" position="before">
             <div
@@ -51,7 +58,7 @@
         <xpath expr="//a[@id='add_to_cart']" position="attributes">
             <attribute name="t-if">
                     website and website.website_show_price and not product.website_hide_price
-                </attribute>
+            </attribute>
         </xpath>
     </template>
     <template id="product_quantity" inherit_id="website_sale.product_quantity">
@@ -66,7 +73,10 @@
     </template>
     <!-- Hide buy now button if "Buy Now Button" option is enabled and not website_show_price -->
     <template id="product_buy_now" inherit_id="website_sale.product_buy_now">
-        <xpath expr="//a[hasclass('o_we_buy_now')]" position="attributes">
+        <xpath
+            expr="//a[contains(@t-attf-class, 'o_we_buy_now')]"
+            position="attributes"
+        >
             <attribute name="t-if">
                 website.website_show_price and not product.website_hide_price
             </attribute>
